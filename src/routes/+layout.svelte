@@ -22,7 +22,7 @@
 		grid-template-rows: auto 1fr auto;
 		/* STOPS WIDE CONTENT FROM STRETCHING THE PAGE */
 		grid-template-columns: minmax(0, 1fr);
-		min-height: 100dvh;
+		min-height: 100svh;
 		max-width: 84rem;
 		margin-inline: auto;
 		padding-inline: var(--gutter);

@@ -70,9 +70,15 @@
 	const scale = $derived(face / render);
 
 	const pad = (n: number) => String(n).padStart(2, '0');
+
+	// PREVIEW SITES MUST NOT STEAL FOCUS (IT SCROLLS THE PAGE ON PHONES)
+	function onblur() {
+		const el = document.activeElement;
+		if (el instanceof HTMLIFrameElement && section.contains(el)) el.blur();
+	}
 </script>
 
-<svelte:window bind:innerHeight onscroll={update} onresize={update} />
+<svelte:window bind:innerHeight onscroll={update} onresize={update} {onblur} />
 
 <section class="dial-scroll" bind:this={section} style:--count={sites.length}>
 	<div class="stage">
@@ -138,6 +144,7 @@
 							scrolling="no"
 							tabindex="-1"
 							aria-hidden="true"
+							inert
 							onload={() => loaded.add(i)}
 						></iframe>
 					{/if}
@@ -169,13 +176,14 @@
 <style>
 	/* SCROLL ROOM FOR EVERY SITE WHILE THE STAGE IS PINNED */
 	.dial-scroll {
-		height: calc(100dvh + (var(--count) - 1) * 45vh);
+		/* SVH, NOT DVH: STAYS FIXED WHILE THE MOBILE ADDRESS BAR SLIDES */
+		height: calc(100svh + (var(--count) - 1) * 45svh);
 	}
 
 	.stage {
 		position: sticky;
 		top: 0;
-		height: 100dvh;
+		height: 100svh;
 		display: grid;
 		align-content: center;
 		justify-items: center;
@@ -211,7 +219,7 @@
 	.dial {
 		position: relative;
 		/* FULL CONTENT WIDTH ON PHONES, BOUNDED BY HEIGHT ON DESKTOP */
-		width: min(100%, 52dvh);
+		width: min(100%, 52svh);
 		aspect-ratio: 1;
 	}
 
