@@ -1,0 +1,1 @@
+import{L as e,S as t,U as n,V as r,W as i,b as a,rt as o,w as s}from"./IYiQG29P.js";var c=s(`<header class="svelte-38sjwj"><p class="mono svelte-38sjwj"> </p> <h1 class="svelte-38sjwj"> </h1></header>`);function l(s,l){var u=c(),d=r(u),f=n(d,!0),p=i(d,2),m=n(p,!0);o(u),e(()=>{a(f,l.path),a(m,l.title)}),t(s,u)}export{l as t};

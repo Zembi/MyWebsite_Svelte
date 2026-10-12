@@ -1,0 +1,3 @@
+# ALLOW CRAWLING EVERYTHING
+User-agent: *
+Disallow:
